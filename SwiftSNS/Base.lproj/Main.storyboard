@@ -9,23 +9,27 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Login View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="SwiftSNS" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="LoginViewController" customModule="SwiftSNS" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="2df-sx-TMS">
+                            <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="2df-sx-TMS">
                                 <rect key="frame" x="65" y="138" width="260" height="260"/>
+                                <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="260" id="BaP-Um-uc9"/>
                                     <constraint firstAttribute="width" constant="260" id="Ffh-3q-Csn"/>
                                 </constraints>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="wAh-wn-5eY" appends="YES" id="Ame-rW-hYE"/>
+                                </connections>
                             </imageView>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Epa-Q7-lst">
-                                <rect key="frame" x="65" y="428" width="260" height="34"/>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="ユーザー名" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Epa-Q7-lst">
+                                <rect key="frame" x="65" y="418" width="260" height="34"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="260" id="soB-aC-XV1"/>
                                 </constraints>
@@ -33,7 +37,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eZd-en-U0C">
-                                <rect key="frame" x="65" y="512" width="260" height="50"/>
+                                <rect key="frame" x="65" y="472" width="260" height="50"/>
                                 <color key="backgroundColor" systemColor="systemOrangeColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="Qje-mc-Mcm"/>
@@ -43,32 +47,43 @@
                                 <state key="normal" title="決定">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="tappedLogin:" destination="BYZ-38-t0r" eventType="touchUpInside" id="FNM-uc-Tkj"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" red="0.92156862750000001" green="0.94509803920000002" blue="0.99215686270000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <gestureRecognizers/>
                         <constraints>
-                            <constraint firstItem="eZd-en-U0C" firstAttribute="top" secondItem="Epa-Q7-lst" secondAttribute="bottom" constant="50" id="2Ij-PW-ecJ"/>
+                            <constraint firstItem="eZd-en-U0C" firstAttribute="top" secondItem="Epa-Q7-lst" secondAttribute="bottom" constant="20" id="2Ij-PW-ecJ"/>
                             <constraint firstItem="2df-sx-TMS" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="K2h-dn-Xaq"/>
                             <constraint firstItem="eZd-en-U0C" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="L5w-rA-qEx"/>
-                            <constraint firstItem="Epa-Q7-lst" firstAttribute="top" secondItem="2df-sx-TMS" secondAttribute="bottom" constant="30" id="O1J-5O-mAE"/>
+                            <constraint firstItem="Epa-Q7-lst" firstAttribute="top" secondItem="2df-sx-TMS" secondAttribute="bottom" constant="20" id="O1J-5O-mAE"/>
                             <constraint firstItem="2df-sx-TMS" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="50" id="lQH-ab-1ko"/>
                             <constraint firstItem="Epa-Q7-lst" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="r6x-34-P8V"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="X1G-PP-xOS"/>
                     <connections>
+                        <outlet property="profileImageView" destination="2df-sx-TMS" id="tNE-UZ-Tcu"/>
+                        <outlet property="textField" destination="Epa-Q7-lst" id="YeA-kR-JI3"/>
                         <segue destination="lj6-XQ-ZKT" kind="show" id="QaZ-Fd-sSe"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="wAh-wn-5eY">
+                    <connections>
+                        <action selector="tappedImageView:" destination="BYZ-38-t0r" id="mAQ-W6-HeR"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="864.61538461538464" y="116.58767772511848"/>
         </scene>
-        <!--View Controller-->
+        <!--Select Room View Controller-->
         <scene sceneID="F7N-bd-5RT">
             <objects>
-                <viewController id="lj6-XQ-ZKT" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SelectRoomViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="lj6-XQ-ZKT" customClass="SelectRoomViewController" customModule="SwiftSNS" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="o7U-23-VsM">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
