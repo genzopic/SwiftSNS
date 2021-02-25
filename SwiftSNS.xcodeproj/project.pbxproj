@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		730B64A825E753A500A0F66C /* TimeLineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730B64A725E753A500A0F66C /* TimeLineViewController.swift */; };
+		730B64AB25E756CF00A0F66C /* EditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730B64AA25E756CF00A0F66C /* EditViewController.swift */; };
 		73263CA725E5F12B00C77079 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73263CA625E5F12B00C77079 /* AppDelegate.swift */; };
 		73263CA925E5F12B00C77079 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73263CA825E5F12B00C77079 /* SceneDelegate.swift */; };
 		73263CAE25E5F12B00C77079 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 73263CAC25E5F12B00C77079 /* Main.storyboard */; };
@@ -24,6 +26,8 @@
 /* Begin PBXFileReference section */
 		5CA38CE8E85035BCCCE2224B /* Pods_SwiftSNS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftSNS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		636CFADE5A7C932063ED5524 /* Pods-SwiftSNS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftSNS.debug.xcconfig"; path = "Target Support Files/Pods-SwiftSNS/Pods-SwiftSNS.debug.xcconfig"; sourceTree = "<group>"; };
+		730B64A725E753A500A0F66C /* TimeLineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeLineViewController.swift; sourceTree = "<group>"; };
+		730B64AA25E756CF00A0F66C /* EditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditViewController.swift; sourceTree = "<group>"; };
 		73263CA325E5F12B00C77079 /* SwiftSNS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftSNS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		73263CA625E5F12B00C77079 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		73263CA825E5F12B00C77079 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -100,6 +104,8 @@
 			children = (
 				73263CDE25E6414D00C77079 /* LoginViewController.swift */,
 				735EF6F825E6529200AD5DB0 /* SelectRoomViewController.swift */,
+				730B64A725E753A500A0F66C /* TimeLineViewController.swift */,
+				730B64AA25E756CF00A0F66C /* EditViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -238,8 +244,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				730B64AB25E756CF00A0F66C /* EditViewController.swift in Sources */,
 				735EF6F925E6529200AD5DB0 /* SelectRoomViewController.swift in Sources */,
 				73263CDF25E6414D00C77079 /* LoginViewController.swift in Sources */,
+				730B64A825E753A500A0F66C /* TimeLineViewController.swift in Sources */,
 				73263CA725E5F12B00C77079 /* AppDelegate.swift in Sources */,
 				735EF6FC25E6541B00AD5DB0 /* SendDBModel.swift in Sources */,
 				73263CE325E6436A00C77079 /* CheckModel.swift in Sources */,
