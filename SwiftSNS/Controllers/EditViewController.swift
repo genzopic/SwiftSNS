@@ -47,11 +47,11 @@ class EditViewController: UIViewController {
     }
 
     @IBAction func tappedSend(_ sender: Any) {
-        // 送信
         if textField.text?.isEmpty == true {
             return
         }
         
+        // 送信
         let passData = passImage.jpegData(compressionQuality: 0.01)
         let sendDBModel = SendDBModel(userID: Auth.auth().currentUser!.uid,
                                       userName: userName,

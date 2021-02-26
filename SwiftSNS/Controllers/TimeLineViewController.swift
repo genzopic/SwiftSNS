@@ -6,17 +6,37 @@
 //
 
 import UIKit
+//
+import Firebase
+import Photos
+import ActiveLabel  // hashタグ
+import SDWebImage
 
 class TimeLineViewController: UIViewController {
+    @IBOutlet weak var tableView: UITableView!
     
+    
+    
+    //
     var roomNumber = Int()
-    
+    var loadDBModel = LoadDBModel()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        tableView.delegate = self
+        tableView.dataSource = self
         
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.isNavigationBarHidden = false
+        //
+        loadDBModel.loadContents(roomNumber: String(roomNumber))
+        
+    }
+    
     // +ボタンをタップで、カメラを起動する
     @IBAction func openCamera(_ sender: Any) {
         
@@ -81,8 +101,44 @@ class TimeLineViewController: UIViewController {
 
 
 // MARK: - UINavigationControllerDelegate,UIImagePickerControllerDelegate
-extension TimeLineViewController: UINavigationControllerDelegate,UIImagePickerControllerDelegate {
-    
+extension TimeLineViewController: UINavigationControllerDelegate,
+                                  UIImagePickerControllerDelegate,
+                                  UITableViewDelegate,
+                                  UITableViewDataSource {
+    // セクション数
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    // セルの行数
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return loadDBModel.dataSets.count
+    }
+    // セルの構築
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+        //　アイコン
+        let profileImageView = cell.contentView.viewWithTag(1) as! UIImageView
+        profileImageView.sd_setImage(with: URL(string: self.loadDBModel.dataSets[indexPath.row].profileImage), completed: nil)
+        profileImageView.layer.cornerRadius = profileImageView.frame.size.height / 2
+        // ユーザ名
+        let userNameLabel = cell.contentView.viewWithTag(2) as! UILabel
+        userNameLabel.text = loadDBModel.dataSets[indexPath.row].userName
+        // 投稿画像
+        let contentImageView = cell.contentView.viewWithTag(3) as! UIImageView
+        contentImageView.sd_setImage(with: URL(string: self.loadDBModel.dataSets[indexPath.row].contentImage), completed: nil)
+        // ハッシュタグ
+        let commentLabel = cell.contentView.viewWithTag(4) as! ActiveLabel
+        commentLabel.enabledTypes = [.hashtag]
+        commentLabel.text = loadDBModel.dataSets[indexPath.row].comment
+        commentLabel.handleHashtagTap { (hashTag) in
+            print("tapped hashTag: ",hashTag)
+            // 画面遷移
+            
+        }
+        
+        return cell
+    }
+    // カメラorアルバムが選択されたら
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         
         if info[.originalImage] as? UIImage != nil{
@@ -101,3 +157,4 @@ extension TimeLineViewController: UINavigationControllerDelegate,UIImagePickerCo
 
     
 }
+
