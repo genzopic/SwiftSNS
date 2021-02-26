@@ -76,14 +76,37 @@ class SendDBModel {
                                                                    "postDate": Date().timeIntervalSince1970]) { (error) in
                     if let err = error {
                         print("setData err: ",err.localizedDescription)
+                        return
                     }
+                    print("content setData success")
                 }
-                
             }
-            
         }
-
-        
+    }
+    //
+    func sendHashTag(hashTag:String){
+        let imageRef = Storage.storage().reference().child(hashTag).child("\(UUID().uuidString +  String(Date().timeIntervalSince1970)).jpg")
+        imageRef.putData(contentImageData, metadata: nil, completion: { (metadata, error) in
+            if let error = error {
+                print(error)
+                return
+            }
+            print("sendHashTagImage putData success")
+            imageRef.downloadURL(completion: { (url, error) in
+                if let err = error {
+                    print("sendHashTagImage downloadURL err: ",err)
+                    return
+                }
+                print("Url: \(url!.absoluteString)")
+                self.db.collection(hashTag).document().setData(["userID":self.userID as Any,"userName":self.userName as Any,"comment":self.comment as Any,"userImage":self.userImageString as Any,"contentImage":url?.absoluteString as Any,"postDate":Date().timeIntervalSince1970]) { (error) in
+                    if let err = error {
+                        print("setData err: ",err.localizedDescription)
+                        return
+                    }
+                    print("hashTag setData success")
+                }
+            })
+        })
     }
     
 }

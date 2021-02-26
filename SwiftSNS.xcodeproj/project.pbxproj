@@ -43,6 +43,7 @@
 		73263CE225E6436A00C77079 /* CheckModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckModel.swift; sourceTree = "<group>"; };
 		733D349125E8A01700A5C8E2 /* LoadDBModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadDBModel.swift; sourceTree = "<group>"; };
 		733D349425E8A05B00A5C8E2 /* DataSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSet.swift; sourceTree = "<group>"; };
+		733D349725E8B27F00A5C8E2 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		735EF6F825E6529200AD5DB0 /* SelectRoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectRoomViewController.swift; sourceTree = "<group>"; };
 		735EF6FB25E6541B00AD5DB0 /* SendDBModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendDBModel.swift; sourceTree = "<group>"; };
 		B899D70453219663E0375704 /* Pods-SwiftSNS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftSNS.release.xcconfig"; path = "Target Support Files/Pods-SwiftSNS/Pods-SwiftSNS.release.xcconfig"; sourceTree = "<group>"; };
@@ -71,6 +72,7 @@
 		73263C9A25E5F12B00C77079 = {
 			isa = PBXGroup;
 			children = (
+				733D349725E8B27F00A5C8E2 /* README.md */,
 				73263CBC25E62AB900C77079 /* .gitignore */,
 				73263CA525E5F12B00C77079 /* SwiftSNS */,
 				73263CA425E5F12B00C77079 /* Products */,

@@ -51,15 +51,11 @@ class EditViewController: UIViewController {
             return
         }
         
-        // 送信
-        let passData = passImage.jpegData(compressionQuality: 0.01)
-        let sendDBModel = SendDBModel(userID: Auth.auth().currentUser!.uid,
-                                      userName: userName,
-                                      comment: textField.text!,
-                                      userImageString: userImageString,
-                                      contentImageData: passData!)
-        sendDBModel.sendData(roomNumber: String(roomNumber))
-        //
+        // ハッシュタグを送信
+        sendContentToHashTag()
+        // ルームに送信
+        sendContentToRoom()
+        // 画面遷移
         self.navigationController?.popViewController(animated: true)
         
     }
@@ -91,6 +87,32 @@ class EditViewController: UIViewController {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
+    }
+    // コンテンツをハッシュタグで送信
+    func sendContentToHashTag(){
+        let hashTagText = textField.text as NSString?
+        do{
+            let regex = try NSRegularExpression(pattern: "#\\S+", options: [])
+            for match in regex.matches(in: hashTagText! as String, options: [], range: NSRange(location: 0, length: hashTagText!.length)) {
+                
+                let passedData = self.passImage.jpegData(compressionQuality: 0.01)
+                let sendDBModel = SendDBModel(userID: Auth.auth().currentUser!.uid, userName: self.userName, comment: self.textField.text!, userImageString:self.userImageString,contentImageData:passedData!)
+                sendDBModel.sendHashTag(hashTag: hashTagText!.substring(with: match.range))
+            }
+        }catch{
+            
+        }
+    }
+    // コンテンツをRoomに送信
+    func sendContentToRoom() {
+        let passData = passImage.jpegData(compressionQuality: 0.01)
+        let sendDBModel = SendDBModel(userID: Auth.auth().currentUser!.uid,
+                                      userName: userName,
+                                      comment: textField.text!,
+                                      userImageString: userImageString,
+                                      contentImageData: passData!)
+        sendDBModel.sendData(roomNumber: String(roomNumber))
+
     }
     
     
