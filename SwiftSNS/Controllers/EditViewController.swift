@@ -28,16 +28,21 @@ class EditViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //キーボード
+        //キーボードに連動して上げ下げする
         NotificationCenter.default.addObserver(self, selector: #selector(EditViewController.keyboardWillShow(_ :)), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(EditViewController.keyboardWillHide(_ :)), name: UIResponder.keyboardWillHideNotification, object: nil)
-        
+        // アプリからユーザ名とアイコンを取得する
         if UserDefaults.standard.object(forKey: "userName") != nil {
             userName = UserDefaults.standard.object(forKey: "userName") as! String
         }
         if UserDefaults.standard.object(forKey: "userImage") != nil {
             userImageString = UserDefaults.standard.object(forKey: "userImage") as! String
         }
+        
+        profileImageView.layer.cornerRadius = profileImageView.frame.size.height / 2
+        profileImageView.sd_setImage(with: URL(string: userImageString), completed: nil)
+        userNameLabel.text = userName
+        contentImageView.image = passImage
 
     }
     

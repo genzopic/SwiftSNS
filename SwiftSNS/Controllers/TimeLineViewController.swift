@@ -26,6 +26,7 @@ class TimeLineViewController: UIViewController {
         
         tableView.delegate = self
         tableView.dataSource = self
+        loadDBModel.loadOKDelegate = self
         
     }
     
@@ -39,17 +40,15 @@ class TimeLineViewController: UIViewController {
     
     // +ボタンをタップで、カメラを起動する
     @IBAction func openCamera(_ sender: Any) {
-        
         // アラート表示（カメラORアルバムの選択）
         showAlert()
-        
-        
         
     }
     
     
     
-    // MARK: func
+    
+    // MARK: - func
     // アラート表示
     func showAlert(){
         let alertController = UIAlertController(title: "選択", message: "どちらを使用しますか?", preferredStyle: .actionSheet)
@@ -104,7 +103,14 @@ class TimeLineViewController: UIViewController {
 extension TimeLineViewController: UINavigationControllerDelegate,
                                   UIImagePickerControllerDelegate,
                                   UITableViewDelegate,
-                                  UITableViewDataSource {
+                                  UITableViewDataSource,
+                                  LoadOKDelegate {
+    // データが読み込まれたら
+    func loadOK(check: Int) {
+        if check == 1 {
+            tableView.reloadData()
+        }
+    }
     // セクション数
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -133,10 +139,18 @@ extension TimeLineViewController: UINavigationControllerDelegate,
         commentLabel.handleHashtagTap { (hashTag) in
             print("tapped hashTag: ",hashTag)
             // 画面遷移
+            let hashVC = self.storyboard?.instantiateViewController(identifier: "hashVC") as! HashTagViewController
+            hashVC.hashTag = hashTag
+            self.navigationController?.pushViewController(hashVC, animated: true)
+            
             
         }
         
         return cell
+    }
+    //
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 528
     }
     // カメラorアルバムが選択されたら
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
