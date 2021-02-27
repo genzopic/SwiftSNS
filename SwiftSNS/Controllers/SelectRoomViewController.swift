@@ -8,9 +8,12 @@
 import UIKit
 //
 import ViewAnimator
+import Firebase
 
 class SelectRoomViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var logoutButton: UIButton!
+    
     //
     var roomArray = ["今日の1枚","爆笑報告場(草)","景色が好き！","夜景写真軍団","今日のごはん"]
     var imageArray = ["0","1","2","3","4"]
@@ -40,7 +43,32 @@ class SelectRoomViewController: UIViewController {
         UIView.animate(views: tableView.visibleCells, animations: animation, completion:nil)
     }
     
-
+    @IBAction func tappedLogoutButton(_ sender: Any) {
+        do {
+            try Auth.auth().signOut()
+            // ログイン画面に戻る
+            guard let rootViewController = UserDefaults.standard.object(forKey: "rootViewController") as? String else { return }
+            if rootViewController == "LoginViewController" {
+                // ルートビューがログインの場合は、戻る
+                navigationController?.popViewController(animated: true)
+            } else {
+                // ルートビューがこの画面の場合は、ルートビューをLoginViewControllerに差し替えてから、現在のビューを閉じて遷移する
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let loginViewController = storyboard.instantiateViewController(identifier: "LoginVC") as! LoginViewController
+                guard let window = UIApplication.shared.connectedScenes.filter({$0.activationState == .foregroundActive}).map({$0 as? UIWindowScene}).compactMap({$0}).first?.windows.filter({$0.isKeyWindow}).first else { return }
+                window.rootViewController?.dismiss(animated: true, completion: {
+                    self.navigationController?.pushViewController(loginViewController, animated: false)
+                    UserDefaults.standard.setValue("LoginVC", forKey: "rootViewController")
+                })
+                
+            }
+            
+        } catch let err as NSError {
+            
+            print("signout err: ",err)
+            
+        }     }
+    
 
 }
 

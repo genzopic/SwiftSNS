@@ -108,6 +108,7 @@ extension TimeLineViewController: UINavigationControllerDelegate,
     // データが読み込まれたら
     func loadOK(check: Int) {
         if check == 1 {
+            print("TimeLineView table reloadData")
             tableView.reloadData()
         }
     }
@@ -123,8 +124,10 @@ extension TimeLineViewController: UINavigationControllerDelegate,
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         //　アイコン
+        print("TimeLineView profileImageView Set: ",self.loadDBModel.dataSets[indexPath.row].profileImage)
         let profileImageView = cell.contentView.viewWithTag(1) as! UIImageView
         profileImageView.sd_setImage(with: URL(string: self.loadDBModel.dataSets[indexPath.row].profileImage), completed: nil)
+        print("profileImageView.frame.size.height: ",profileImageView.frame.size.height)
         profileImageView.layer.cornerRadius = profileImageView.frame.size.height / 2
         // ユーザ名
         let userNameLabel = cell.contentView.viewWithTag(2) as! UILabel
@@ -142,8 +145,6 @@ extension TimeLineViewController: UINavigationControllerDelegate,
             let hashVC = self.storyboard?.instantiateViewController(identifier: "hashVC") as! HashTagViewController
             hashVC.hashTag = hashTag
             self.navigationController?.pushViewController(hashVC, animated: true)
-            
-            
         }
         
         return cell

@@ -15,6 +15,7 @@ class LoginViewController: UIViewController,UIImagePickerControllerDelegate,UINa
     @IBOutlet weak var textField: UITextField!
     
     var urlString = String()
+    var sendDBModel = SendDBModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,14 +41,16 @@ class LoginViewController: UIViewController,UIImagePickerControllerDelegate,UINa
             print("user: ",user.debugDescription)
 
             // 次の画面へ遷移
-            let selectRoomViewController = self.storyboard?.instantiateViewController(identifier: "SelectRoomViewController") as! SelectRoomViewController
+            let selectVC = self.storyboard?.instantiateViewController(identifier: "SelectVC") as! SelectRoomViewController
+            
+            // ユーザー名を保存
             UserDefaults.standard.setValue(self.textField.text, forKey: "userName")
             
             // 画像をクラウドストレージに送信
-            let data = self.profileImageView.image?.jpegData(compressionQuality: 0.1)
+            guard let data = self.profileImageView.image?.jpegData(compressionQuality: 0.1) else { return }
+            self.sendDBModel.sendProfileImageData(data: data)
             
-            
-            self.navigationController?.pushViewController(selectRoomViewController, animated: true)
+            self.navigationController?.pushViewController(selectVC, animated: true)
             
         }
         
@@ -63,7 +66,7 @@ class LoginViewController: UIViewController,UIImagePickerControllerDelegate,UINa
         generator.notificationOccurred(.success)
         
         showAlert()
-
+        
     }
     
     

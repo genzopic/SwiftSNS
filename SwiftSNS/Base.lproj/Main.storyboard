@@ -17,7 +17,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="2df-sx-TMS">
+                            <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="noImage" translatesAutoresizingMaskIntoConstraints="NO" id="2df-sx-TMS">
                                 <rect key="frame" x="65" y="138" width="260" height="260"/>
                                 <gestureRecognizers/>
                                 <constraints>
@@ -30,6 +30,7 @@
                             </imageView>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="ユーザー名" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Epa-Q7-lst">
                                 <rect key="frame" x="65" y="418" width="260" height="34"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="260" id="soB-aC-XV1"/>
                                 </constraints>
@@ -83,7 +84,7 @@
         <!--Select Room View Controller-->
         <scene sceneID="F7N-bd-5RT">
             <objects>
-                <viewController storyboardIdentifier="SelectRoomViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="lj6-XQ-ZKT" customClass="SelectRoomViewController" customModule="SwiftSNS" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SelectVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="lj6-XQ-ZKT" customClass="SelectRoomViewController" customModule="SwiftSNS" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="o7U-23-VsM">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -120,6 +121,17 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="051-W0-1iH">
+                                <rect key="frame" x="277" y="765" width="93" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="ログアウト">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="tappedLogoutButton:" destination="lj6-XQ-ZKT" eventType="touchUpInside" id="Jjj-yR-t7p"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Zhg-1P-yMg"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -132,6 +144,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="cKS-QF-X7d"/>
                     <connections>
+                        <outlet property="logoutButton" destination="051-W0-1iH" id="UNl-DH-UO8"/>
                         <outlet property="tableView" destination="DIF-ZI-u72" id="YAT-cd-qiI"/>
                         <segue destination="2k4-Mq-1H6" kind="show" id="FT2-tb-UAV"/>
                     </connections>
@@ -411,6 +424,7 @@
         </designable>
     </designables>
     <resources>
+        <image name="noImage" width="128" height="128"/>
         <image name="plus" width="256" height="256"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
